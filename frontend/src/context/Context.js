@@ -14,6 +14,10 @@ const Context = ({children}) => {
     console.log("requested user info::"+JSON.stringify(userInfo))
     setUser(userInfo);
   },[navigate]  )
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userdata"));
+    setUser(userInfo);
+  }, [])
     return (
         <Cart.Provider value={{state,dispatch,user,setUser}}>
             {children}

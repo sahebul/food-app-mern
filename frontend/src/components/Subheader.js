@@ -2,18 +2,19 @@ import { Box, Flex, Heading,Button } from "@chakra-ui/react"
 import { CartState } from '../context/Context';
 import ProfileMenu from "./ProfileMenu";
 import {useNavigate} from 'react-router-dom';
-function Subheader() {
+import Logo from "./Logo";
+function Subheader({title}) {
     const {user} =CartState()
     const navigate=useNavigate();
     return (
-        <Box p='20px' backgroundColor="blackAlpha.100">
+        <Box p='20px' backgroundColor="#272f3d">
             <Flex justifyContent='space-between'>
                 <Box cursor="pointer" onClick={()=>navigate('/')}>
-                    <Heading>Foodie</Heading>
+                   <Logo colorScheme={"dark"}/>
                 </Box>
                 {
                      user ? (
-                        <ProfileMenu/>
+                        <ProfileMenu colorScheme={"dark"}/>
                     ):(
                         <Flex>
                             <Button backgroundColor="transparent" fontWeight="light" onClick={()=>navigate('/login')}>Log in</Button>
@@ -24,6 +25,9 @@ function Subheader() {
                 
 
             </Flex>
+            <Box  h="100px">   
+                <Heading as='h5' size='sm' color="white" >{title}</Heading>
+            </Box>
         </Box>
     )
 }

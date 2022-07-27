@@ -32,8 +32,7 @@ const placeOrder=expressAsyncHandler(async(req,res)=>{
 
 const myOrders=expressAsyncHandler(async(req,res)=>{
         try{
-            const myorders=await Orders.find({user:req.user._id})
-            .populate('products').populate('d_add')
+            const myorders=await Orders.find({user:req.user._id}).populate('d_add')
             res.status(201).json(myorders);
         }catch(error){
             res.status(400);

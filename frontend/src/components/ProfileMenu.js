@@ -1,7 +1,7 @@
-import { Menu, MenuButton,Avatar, MenuList, MenuItem ,Text, Flex} from "@chakra-ui/react";
+import { Menu, MenuButton,Avatar, MenuList, MenuItem ,Text, Flex,Button}  from '@chakra-ui/react';
 import {  ChevronDownIcon } from "@chakra-ui/icons";
 import {useNavigate} from 'react-router-dom';
-const ProfileMenu = () => {
+const ProfileMenu = ({colorScheme}) => {
 
     const navigate=useNavigate();
     const logoutHandler=()=>{
@@ -11,20 +11,13 @@ const ProfileMenu = () => {
     return (
         <div>
             <Menu>
-                <MenuButton 
-                as="button"
-                righticon={<ChevronDownIcon/>}
-                >
-                    <Flex>
-                        
-                         <Avatar bg='teal.500' w={8} h={8}   cursor="pointer" mr={2} ml={2}/>
-                         {/* <Text fontWeight="semibold" >{user.name}</Text> */}
-                    </Flex>
+                <MenuButton as={Button}   variant="none" rightIcon={<ChevronDownIcon color={colorScheme ==="dark" ? "white":"blackAlpha.800"}  />}>
+                <Avatar bg={colorScheme ==="dark" ? "whiteAlpha.300":"blackAlpha.800"}  w={8} h={8}   cursor="pointer"/>
                 
                 </MenuButton>
                 <MenuList>
                     <MenuItem>My Profile</MenuItem>
-                    <MenuItem>My Orders</MenuItem>
+                    <MenuItem onClick={()=>navigate('/my-orders')}>My Orders</MenuItem>
                     <MenuItem onClick={logoutHandler}>Logout</MenuItem>
                 </MenuList>
             </Menu>

@@ -43,7 +43,7 @@ function Address() {
     useEffect(()=>{
         if(user)
         getDeliveryAddress();
-    },[])
+    },[user.token])
 
     const clearForm=()=>{
         setName('')
@@ -202,10 +202,8 @@ function Address() {
 
     return (
         <div>
-            <Subheader/>
-            <Box  backgroundColor="blackAlpha.100" h="100px">   
-                <Heading as='h5' size='sm' >Delivery Address</Heading>
-            </Box>
+            <Subheader title={"Delivery Address"}/>
+           
             <Box  p={5} m={3} >
                                 <Button   size="xs"
                                         leftIcon={<AddIcon/>}

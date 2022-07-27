@@ -17,10 +17,7 @@ function Orderplace() {
       };
     return (
         <div>
-            <Subheader/>
-            <Box  backgroundColor="blackAlpha.100" h="100px">   
-                <Heading as='h5' size='sm' >Order Status</Heading>
-            </Box>
+            <Subheader title={"Order Status"}/>
             <Box justifyContent="center" alignContent="center">
                             
             <Lottie options={defaultOptions}

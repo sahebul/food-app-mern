@@ -3,9 +3,10 @@ import React from 'react'
 import NotificationBadge from 'react-notification-badge';
 import {Effect} from 'react-notification-badge';
 import { CartState } from '../context/Context';
-import {MdShoppingCart} from 'react-icons/md'
+import {MdShoppingCart,MdFastfood} from 'react-icons/md'
 import {useNavigate } from 'react-router-dom'
 import ProfileMenu from './ProfileMenu';
+import Logo from './Logo';
 export default function Header() {
     const navigate = useNavigate();
     const {state:{cart},user} =CartState()
@@ -15,9 +16,7 @@ export default function Header() {
             
             <Flex justifyContent="space-between">
                 <Box cursor="pointer" onClick={()=>navigate('/')}>
-                    <Flex>
-                       <Heading>Foodie</Heading>
-                    </Flex>
+                    <Logo/>
                    
                 </Box>
                 <Box display={{base:'none',md:'flex'}}>

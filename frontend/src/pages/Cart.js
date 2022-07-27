@@ -22,10 +22,8 @@ function Cart() {
     }
     return (
         <div>
-            <Subheader/>
-            <Box  backgroundColor="blackAlpha.100" h="100px">   
-                <Heading as='h5' size='sm' >My Cart</Heading>
-            </Box>
+            <Subheader title={"My Cart"}/>
+           
             <Flex flexDirection={{base:"column",md:'row'}}>
                 <Box w={{base:"100%",md:"70%"}}  >
                     {/* for cart items */}
