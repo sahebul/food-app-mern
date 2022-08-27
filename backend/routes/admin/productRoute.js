@@ -6,7 +6,7 @@ const router=express.Router();
 
 router.route('/').get(list);
 router.route('/add').post(adminAuth,doUpload,add);
-router.route('/edit').put(adminAuth,edit);
+router.route('/edit').put(adminAuth,doUpload,edit);
 router.route('/delete/:id').delete(adminAuth,del);
 router.route('/category/:id').get(productByCategory)
 module.exports=router;

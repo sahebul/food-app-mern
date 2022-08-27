@@ -1,16 +1,25 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { Box, Button, Heading, Input,useToast  } from "@chakra-ui/react"
 import axios from 'axios'
-import { CartState } from '../context/Context'
+import { CartState } from '../../context/Context'
 import {useNavigate} from 'react-router-dom'
-import Subheader from '../components/Subheader'
+import Header from '../../components/admin/Header'
 function Login() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const toast= useToast();
-    const {setUser} = CartState();
+    const {setAdminUser} = CartState();
     const navigate=useNavigate()
+
+
+    useEffect(()=>{
+        //check if login
+        const admin=localStorage.getItem('adminuserdata');
+        if(admin){
+            navigate('/admin/dashboard')
+        }
+    },[])
     const attemptLogin=async()=>{
         if(!email || !password){
             toast({
@@ -26,9 +35,9 @@ function Login() {
         }
         setLoading(true)
         try{
-            const {data} = await axios.post('/api/user/login',{email,password})
-            setUser(data)
-            localStorage.setItem('userdata',JSON.stringify(data))
+            const {data} = await axios.post('/api/admin/user/login',{email,password})
+            setAdminUser(data)
+            localStorage.setItem('adminuserdata',JSON.stringify(data))
            
             setLoading(false)
             toast({
@@ -37,7 +46,7 @@ function Login() {
                 duration: 9000,
                 isClosable: true,
               })
-              navigate('/')
+              navigate('/admin/dashboard')
         }catch(error){
             setLoading(false)
             toast({
@@ -50,11 +59,11 @@ function Login() {
                 isClosable:true
             })  
         }
-        console.log("login")
+        
     }
     return (
         <div>
-            <Subheader title="Login"/>
+            <Header title="Admin Login"/>
          <Box w={'35%'} m="auto"  border='1px' borderColor='gray.300' borderRadius="10" padding={10} mt={10} >
                 <Heading as="h5" size="sm" pb={50}>Login</Heading>
                     <Input placeholder="Email" mb={5}  onChange={(e)=>setEmail(e.target.value)} />

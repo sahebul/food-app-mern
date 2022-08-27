@@ -1,8 +1,14 @@
 const expressAsyncHandler = require("express-async-handler");
 const Products = require("../../models/admin/Products");
 const list=expressAsyncHandler(async(req,res)=>{
+
+    const searchTerm=req.query.search ? {
+                $or:[
+                    {name:{$regex:req.query.search,$options:"i"}}
+                ]
+    }:{}
         try{
-            const result=await Products.find({}).populate('category');
+            const result=await Products.find(searchTerm).populate('category');
             res.status(201);
             res.json(result);
         }catch(error){
@@ -38,7 +44,19 @@ const add=expressAsyncHandler(async(req,res)=>{
 const edit=expressAsyncHandler(async(req,res)=>{
     const {name,price,soldas,sdescription,id}=req.body;
     try{
-        const prod=await Products.findByIdAndUpdate(id,{name,price,soldas,sdescription},{new:true})
+        // const prod=await Products.findByIdAndUpdate(id,{name,price,soldas,sdescription},{new:true})
+        const new_data={
+            name:name,
+            price:price,
+            soldas:soldas,
+            sdescription:sdescription,
+            description:req.body.description ?? null,
+            category:req.body.category,
+        }
+        if(req.file){
+            new_data.image=req.file.filename;
+        }
+        const prod=await Products.findByIdAndUpdate(id,new_data,{new:true})
         res.status(201);
         res.json(prod);
     }catch(error){

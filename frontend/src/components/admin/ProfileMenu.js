@@ -5,8 +5,8 @@ const ProfileMenu = ({colorScheme}) => {
 
     const navigate=useNavigate();
     const logoutHandler=()=>{
-        localStorage.removeItem('userdata');
-        navigate('/login');
+        localStorage.removeItem('adminuserdata');
+        navigate('/admin');
     }
     return (
         <div>
@@ -16,8 +16,7 @@ const ProfileMenu = ({colorScheme}) => {
                 
                 </MenuButton>
                 <MenuList>
-                    <MenuItem onClick={()=>navigate('/my-profile')} >My Profile</MenuItem>
-                    <MenuItem onClick={()=>navigate('/my-orders')}>My Orders</MenuItem>
+                  
                     <MenuItem onClick={logoutHandler}>Logout</MenuItem>
                 </MenuList>
             </Menu>

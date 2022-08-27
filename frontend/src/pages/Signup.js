@@ -3,6 +3,7 @@ import { Box, Button, Heading, Input,useToast  } from "@chakra-ui/react"
 import axios from 'axios'
 import { CartState } from '../context/Context'
 import {useNavigate} from 'react-router-dom'
+import Subheader from '../components/Subheader'
 function Signup() {
     const [loading, setLoading] = useState(false)
     const [name, setName] = useState('')
@@ -53,7 +54,9 @@ function Signup() {
         console.log("login")
     }
     return (
-        <Box w={'35%'} m="auto"  border='1px' borderColor='gray.300' borderRadius="10" padding={10} mt={20} >
+        <div>
+        <Subheader title="Login"/>
+        <Box w={'35%'} m="auto"  border='1px' borderColor='gray.300' borderRadius="10" padding={10} mt={10} >
             <Heading as="h5" size="sm" pb={50}>Sign up</Heading>
                 <Input placeholder="Full Name" mb={5}  onChange={(e)=>setName(e.target.value)} />
                 <Input placeholder="Email" mb={5}  onChange={(e)=>setEmail(e.target.value)} />
@@ -63,6 +66,7 @@ function Signup() {
                 isLoading={loading}
                 >Signup</Button>
         </Box>
+        </div>
     )
 }
 

@@ -3,6 +3,7 @@ import { CartState } from '../context/Context';
 import ProfileMenu from "./ProfileMenu";
 import {useNavigate} from 'react-router-dom';
 import Logo from "./Logo";
+import CartCount from "./cart/CartCount";
 function Subheader({title}) {
     const {user} =CartState()
     const navigate=useNavigate();
@@ -12,16 +13,32 @@ function Subheader({title}) {
                 <Box cursor="pointer" onClick={()=>navigate('/')}>
                    <Logo colorScheme={"dark"}/>
                 </Box>
-                {
+                <Box>
+                    <Flex>
+                    <CartCount colorScheme={"dark"}/>
+                    {
+                        user ? (
+                            <ProfileMenu colorScheme={"dark"}/>
+                        ):(<>
+                            <Button backgroundColor="transparent" fontWeight="light" onClick={()=>navigate('/login')}>Log in</Button>
+                            <Button backgroundColor="transparent" fontWeight="light" onClick={()=>navigate('/signup')}>Sign up</Button>
+                            </>)
+                    }
+               
+                    </Flex>
+                    
+                </Box>
+
+                {/* {
                      user ? (
                         <ProfileMenu colorScheme={"dark"}/>
                     ):(
                         <Flex>
-                            <Button backgroundColor="transparent" fontWeight="light" onClick={()=>navigate('/login')}>Log in</Button>
-                            <Button backgroundColor="transparent" fontWeight="light" onClick={()=>navigate('/signup')}>Sign up</Button>
+                            <Button backgroundColor="transparent" colorScheme="whiteAlpha" fontWeight="light" onClick={()=>navigate('/login')}>Log in</Button>
+                            <Button backgroundColor="transparent" colorScheme="whiteAlpha" fontWeight="light" onClick={()=>navigate('/signup')}>Sign up</Button>
                         </Flex>
                     )
-                }
+                } */}
                 
 
             </Flex>

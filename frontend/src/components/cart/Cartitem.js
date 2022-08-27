@@ -21,7 +21,7 @@ function Cartitem({ item }) {
               {item.name}
             </Text>
             <Text noOfLines={1} maxWidth="150px" align="left" fontSize="12px">
-              {item.sdescription}
+            ₹{item.price}
             </Text>
           </Box>
         </Flex>
