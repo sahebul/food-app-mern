@@ -7,6 +7,7 @@ const orderRoute=require('./routes/orderRoutes');
 const adminProductRoute=require('./routes/admin/productRoute');
 const {notFound,errorHandler} =require('./middleWare/errorHandler');
 const adminCatgeoryRoute = require('./routes/admin/categoryRoute');
+const adminOrderRoute = require('./routes/admin/orderRoute')
 const app = express();
 dotenv.config();
 mongoConnect();
@@ -22,6 +23,8 @@ app.use('/images', express.static('uploads'));
 app.use('/api/admin/user',adminRoute)
 app.use('/api/admin/category',adminCatgeoryRoute)
 app.use('/api/admin/product',adminProductRoute)
+
+app.use('/api/admin/orders',adminOrderRoute)
 // end of admin routes
 
 

@@ -1,5 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const Products = require("../../models/admin/Products");
+const fs=require('fs');
 const list=expressAsyncHandler(async(req,res)=>{
 
     const searchTerm=req.query.search ? {
@@ -43,6 +44,7 @@ const add=expressAsyncHandler(async(req,res)=>{
 })
 const edit=expressAsyncHandler(async(req,res)=>{
     const {name,price,soldas,sdescription,id}=req.body;
+    let old_prod='';
     try{
         // const prod=await Products.findByIdAndUpdate(id,{name,price,soldas,sdescription},{new:true})
         const new_data={
@@ -55,8 +57,14 @@ const edit=expressAsyncHandler(async(req,res)=>{
         }
         if(req.file){
             new_data.image=req.file.filename;
+            old_prod=await Products.findById(id);
         }
         const prod=await Products.findByIdAndUpdate(id,new_data,{new:true})
+        if(prod && req.file){
+            fs.unlink('./uploads/'+old_prod.image,function(rr){
+                console.log(rr);
+            });
+        }
         res.status(201);
         res.json(prod);
     }catch(error){

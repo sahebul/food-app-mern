@@ -14,7 +14,7 @@ function Dashboard() {
                     <Box onClick={()=>navigate('/admin/products')}  cursor="pointer" bg='#18c2d9' height='80px' display="flex" justifyContent="center" alignItems="center" borderRadius={5} >
                         <Text >Products</Text>
                     </Box>
-                    <Box cursor="pointer" bg='#335e63' height='80px' display="flex" justifyContent="center" alignItems="center" borderRadius={5}>
+                    <Box onClick={()=>navigate('/admin/orders')}  cursor="pointer" bg='#335e63' height='80px' display="flex" justifyContent="center" alignItems="center" borderRadius={5}>
                         <Text>Orders</Text>
                     </Box>
 

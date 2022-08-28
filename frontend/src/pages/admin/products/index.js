@@ -16,17 +16,20 @@ import {
   Button,
   Box,
   Link,
-  Flex
+  Flex,
+  SkeletonText
 } from "@chakra-ui/react";
 function Products() {
   const [productList, setProductList] = useState();
+  const [isLoading, setIsloading] = useState(false);  
   const navigate = useNavigate();
   useEffect(() => {
     getCategories();
   }, []);
   const getCategories = async () => {
+    setIsloading(true)
     const { data } = await axios.get("/api/admin/product");
-
+    setIsloading(false)
     setProductList(data);
   };
   return (
@@ -45,6 +48,7 @@ function Products() {
             <Button onClick={()=>navigate('/admin/products/add')}> Add Product</Button>
             
         </Flex>
+      <SkeletonText mt='4' noOfLines={10} spacing='4'  isLoaded={!isLoading} >
       <TableContainer p="20px">
         <Table variant="striped" colorScheme="teal" size="sm">
           <TableCaption>Product List</TableCaption>
@@ -106,6 +110,7 @@ function Products() {
           </Tfoot>
         </Table>
       </TableContainer>
+      </SkeletonText>
     </div>
   );
 }

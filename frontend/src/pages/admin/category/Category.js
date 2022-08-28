@@ -13,23 +13,45 @@ import {
   TableContainer,
   Tfoot,
   Button,
+  Flex,
+  Link,
+  Box,
+  Skeleton ,SkeletonText
 } from "@chakra-ui/react";
 function Category() {
   const [categoryList, setCategoryList] = useState();
+  const [isLoading, setIsloading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     getCategories();
   }, []);
   const getCategories = async () => {
+    setIsloading(true)
     const { data } = await axios.get("/api/admin/category");
-
+    setIsloading(false);
     setCategoryList(data);
   };
   return (
     <div>
       <Header title="Category" />
-
-      <TableContainer>
+      <Flex
+                justifyContent="space-between" 
+                flexDirection="row"
+                p="20px"
+                >
+                    <Box>
+                        <Link onClick={()=>navigate('/admin')} m={2}>Dashboard</Link>
+                        /
+                        <Link  m={2}>Category</Link> 
+                    </Box>
+                    <Button onClick={()=>navigate('/admin/category/add')}> Add Category</Button>
+                   
+                    
+       </Flex>
+       <SkeletonText mt='4' noOfLines={10} spacing='4'  isLoaded={!isLoading} >
+   
+      
+      <TableContainer p="20px"> 
         <Table variant="striped" colorScheme="teal" size="sm">
           <TableCaption>Category List</TableCaption>
           <Thead>
@@ -68,6 +90,7 @@ function Category() {
           </Tfoot>
         </Table>
       </TableContainer>
+      </SkeletonText>
     </div>
   );
 }

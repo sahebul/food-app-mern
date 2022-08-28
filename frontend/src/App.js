@@ -13,11 +13,14 @@ import SelectAddress from './pages/SelectAddress';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminCategory from './pages/admin/category/Category';
-import AddCategory from './pages/admin/category/Category';
+import AddCategory from './pages/admin/category/Add';
 import EditCategory from './pages/admin/category/EditCategory';
 import Products from './pages/admin/products';
 import AddProduct from './pages/admin/products/Add';
 import EditProduct from './pages/admin/products/Edit';
+
+import AdminOrders from './pages/admin/orders'
+import AdminOrdersDetails from './pages/admin/orders/Details'
 import {Routes,Route} from 'react-router-dom'
 function App() {
   return (
@@ -37,11 +40,15 @@ function App() {
         <Route path={"/admin/login"} element={<AdminLogin/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
         <Route path="/admin/category" element={<AdminCategory/>}/>
+        <Route path="admin/category/add" element={<AddCategory/>}/>
         <Route path="/admin/category/edit" element={<EditCategory/>}/>
 
         <Route path="/admin/products" element={<Products/>}/>
         <Route path="/admin/products/add" element={<AddProduct/>}/>
         <Route path="/admin/products/edit" element={<EditProduct/>}/>
+
+        <Route path="/admin/orders" element={<AdminOrders/>}/>
+        <Route path="/admin/orders/details" element={<AdminOrdersDetails/>}/>
       </Routes>
     
     </div>

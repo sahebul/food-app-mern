@@ -10,6 +10,7 @@ function Edit() {
     const {adminUser} =CartState();
     const toast=useToast();
     const {state}= useLocation();
+    const [isLoading, setIsloading] = React.useState(false);  
     const [data,setData]=React.useState({
         id:state._id,
         name:state.name,
@@ -20,7 +21,7 @@ function Edit() {
         prod_image:'',
         category:state.category._id
     });
-    console.log("my data",data)
+   
     const[categoryList,setCategoryList]=React.useState();
     useEffect(()=>{
         getCategories();
@@ -36,6 +37,7 @@ function Edit() {
           } 
     }
     const handleSubmit=async()=>{
+        setIsloading(true);
         const config={
             headers:{
                 Authorization:`Bearer ${adminUser.token}`
@@ -57,7 +59,7 @@ function Edit() {
         formData.append("category", data.category);
       
         const response = await axios.put('/api/admin/product/edit',formData,config);
-        // console.log(response.data);
+        setIsloading(false);
         toast({
             title: "Product updated successfully",
             status: 'success',
@@ -159,6 +161,7 @@ function Edit() {
                     </Flex>
                     
                         <Button
+                        isLoading={isLoading}
                             onClick={()=>handleSubmit()}
                                 mt={4}
                                 colorScheme='teal'

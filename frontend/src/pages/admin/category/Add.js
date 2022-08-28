@@ -1,33 +1,30 @@
 import { FormControl, FormLabel, Input,Button, Box,useToast,Link,Flex } from '@chakra-ui/react';
 import React from 'react'
-import {useNavigate,useLocation }from 'react-router-dom';
+import {useNavigate }from 'react-router-dom';
 import Header from "../../../components/admin/Header";
 import axios from 'axios';
 import { CartState } from '../../../context/Context';
-function EditCategory() {
+function Add() {
     
     const navigate=useNavigate();
-    const {state}= useLocation();
     const {adminUser} =CartState();
     const toast=useToast();
     const [isLoading, setIsloading] = React.useState(false);
     const [data,setData]=React.useState({
-        id:state._id,
-        name:state.name,
-        description:state.description
+        name:'',
+        description:''
     });
     const handleSubmit=async()=>{
-        setIsloading(true);
         const config={
             headers:{
                 Authorization:`Bearer ${adminUser.token}`
             }
         }
-      
-        const response = await axios.put('/api/admin/category/edit',data,config);
+        setIsloading(true);
+        const response = await axios.post('/api/admin/category/add',data,config);
         setIsloading(false);
         toast({
-            title: "Records updated successfully",
+            title: "Records added successfully",
             status: 'success',
             duration: 9000,
             isClosable: true,
@@ -48,7 +45,7 @@ function EditCategory() {
                         /
                         <Link  onClick={()=>navigate('/admin/category')} m={2}>Category</Link> 
                         /
-                        <Link   m={2}>Edit Category</Link> 
+                        <Link  m={2}>Add Category</Link> 
                     </Box>
                    
                     
@@ -69,7 +66,7 @@ function EditCategory() {
                             />
                         </FormControl>
                         <Button
-                        isLoading={isLoading}
+                          isLoading={isLoading}
                             onClick={()=>handleSubmit()}
                                 mt={4}
                                 colorScheme='teal'
@@ -82,4 +79,4 @@ function EditCategory() {
     )
 }
 
-export default EditCategory
+export default Add

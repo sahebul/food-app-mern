@@ -9,6 +9,7 @@ function Add() {
     const navigate=useNavigate();
     const {adminUser} =CartState();
     const toast=useToast();
+    const [isLoading, setIsloading] = React.useState(false);  
     const [data,setData]=React.useState({
         name:'',
         sdescription:'',
@@ -33,6 +34,7 @@ function Add() {
           } 
     }
     const handleSubmit=async()=>{
+        setIsloading(true);
         const config={
             headers:{
                 Authorization:`Bearer ${adminUser.token}`
@@ -49,7 +51,7 @@ function Add() {
         formData.append("category", data.category);
       
         const response = await axios.post('/api/admin/product/add',formData,config);
-        console.log(response.data);
+        setIsloading(false);
         toast({
             title: "Product added successfully",
             status: 'success',
@@ -151,6 +153,7 @@ function Add() {
                     </Flex>
                     
                         <Button
+                        isLoading={isLoading}
                             onClick={()=>handleSubmit()}
                                 mt={4}
                                 colorScheme='teal'
