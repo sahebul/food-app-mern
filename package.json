@@ -2,6 +2,9 @@
   "name": "travelapp",
   "version": "1.0.0",
   "description": "Travell App",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "main": "server.js",
   "author": "sahebul",
   "license": "MIT",
