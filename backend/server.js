@@ -46,4 +46,8 @@ app.use('/api/order',orderRoute)
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(5000,console.log("App is running on 5000"));
+app.set( 'port', ( process.env.PORT || 5000 ));
+const PORT = process.env.PORT || 5000;
+ app.listen( app.get( 'port' ), function() {
+  console.log( 'Node server is running on port ' + app.get( 'port' ));
+  });
