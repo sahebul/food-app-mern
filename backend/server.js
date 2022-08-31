@@ -8,6 +8,7 @@ const adminProductRoute=require('./routes/admin/productRoute');
 const {notFound,errorHandler} =require('./middleWare/errorHandler');
 const adminCatgeoryRoute = require('./routes/admin/categoryRoute');
 const adminOrderRoute = require('./routes/admin/orderRoute')
+const path = require('path');
 const app = express();
 dotenv.config();
 mongoConnect();
