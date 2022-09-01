@@ -1,5 +1,6 @@
 {
   "name": "travelapp",
+  "homepage": ".",
   "version": "1.0.0",
   "description": "Travell App",
   "engines": {
