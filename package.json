@@ -1,8 +1,7 @@
 {
-  "name": "travelapp",
-  "homepage": ".",
+  "name": "foodapp",
   "version": "1.0.0",
-  "description": "Travell App",
+  "description": "Food App",
   "engines": {
     "node": ">=16.0.0"
   },
